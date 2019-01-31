@@ -1,3 +1,4 @@
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -22,6 +23,17 @@ public class Lesson {
         out.flush();
         jaxb();
         jacksonXml();
+        jacksonJson();
+    }
+
+    private static void jacksonJson() throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        Course course = new Course(3, "dfsdf");
+        objectMapper.writeValue(new File("course_json.json"), course);
+        Course course1 = objectMapper.readValue(new File("course_json.json"), Course.class);
+        System.out.println(course1);
     }
 
     private static void jacksonXml() throws IOException{

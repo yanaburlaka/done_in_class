@@ -1,22 +1,27 @@
 import javax.xml.bind.annotation.XmlRootElement;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 @XmlRootElement
 public class Course {
     private Integer id;
     private String name;
-    private Date date;
 
-    public Course(Integer id, String name, Date date) {
+
+
+
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public void setName(String name) {
         this.name = name;
-        this.date = date;
     }
 
-    public Date getDate() {
-        return date;
 
-    }
+
+
 
     public String getName() {
         return name;
